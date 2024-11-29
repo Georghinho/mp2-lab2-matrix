@@ -153,7 +153,7 @@ public:
   {
       TDynamicVector<T> Minus(this->sz);
       for (int i = 0; i < this->sz; i++) {
-          Sum[i] = pMem[i] - val;;
+          Minus[i] = pMem[i] - val;;
       }
       return Minus;
   }
@@ -320,7 +320,7 @@ public:
       for (int i = 0; i < sz; i++) {
           res[i] = 0;
           for (int j = 0; j < sz(); j++) {
-              res[i]=res[i]+this->pMem[i][j]*v[j]
+              res[i] = res[i] + this->pMem[i][j] * v[j];
           }
           return res;
       }
@@ -373,31 +373,26 @@ public:
   
 
   // ввод/вывод
-  friend istream& operator>>(istream& istr, TDynamicMatrix& m)
-  {
-      std::cout << "Enter the matrix";
-      for (int i = 0; i < v.sz; i++)
-      {
-          istr >> v[i];
-      }
-      return istr;
-
-  }
-  friend ostream& operator<<(ostream& ostr, const TDynamicMatrix& v)
+  friend istream& operator>>(istream& istr, TDynamicMatrix& v)
   {
       for (int i = 0; i < v.sz; i++) {
-          for (int j = 0; j < i; j++)
-          {
-              ostr << setw(6) << " ";
-          }
-          for (int j = 0; j < v[i].size(); j++)
-          {
-              ostr << setw(6) << v[i][j];
-          }
-          ostr << std::endl;
+          for (int j = 0; j < v.sz; j++)
+              istr >> v.pMem[i][j];
       }
+
+      return istr;
+  }
+  
+  friend ostream& operator<<(ostream& ostr, const TDynamicMatrix& v)                                        //provereno
+  {
+      for (size_t i = 0; i < v.sz; i++) {
+          for (size_t j = 0; j < v.sz; j++)
+              ostr << v.pMem[i][j] << ' ';
+      }
+
       return ostr;
   }
+
 };
 
 #endif
