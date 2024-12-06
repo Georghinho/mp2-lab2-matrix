@@ -79,10 +79,11 @@ public:
           return *this;
       }
       delete[] pMem;
+      pMem = v.pMem;
       sz = v.sz;
-      pMem = new T[sz];
-      v.sz = 0;
       v.pMem = nullptr;
+      v.sz = 0;
+
       return *this;
   }
 
